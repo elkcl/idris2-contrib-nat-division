@@ -374,3 +374,9 @@ modDividendMinusDivMultDivider numer denom = Calc $
   ~~ (numer `minus` divNatNZ numer denom denom_nz * denom)
             ...(sym $ cong (`minus` (divNatNZ numer denom denom_nz * denom))
                            (DivisionTheorem numer denom denom_nz denom_nz))
+
+public export
+divCeilNZ' : Nat -> (y: Nat) -> (0 _ : IsSucc y) => Nat
+divCeilNZ' x y @{cnz} = case (modNatNZ x y cnz) of
+    Z   => divNatNZ x y cnz
+    S _ => S (divNatNZ x y cnz)
